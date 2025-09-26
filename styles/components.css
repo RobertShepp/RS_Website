@@ -143,12 +143,11 @@
 
 /* Button Base */
 .btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-xxs);
-  height: 56px;
-  padding: var(--space-xs) var(--space-s);
+  gap: var(--XXS-spacing, 8px);
+  padding: 16px 24px;
   font-family: var(--font-family-primary);
   font-size: var(--font-size-paragraph);
   font-weight: var(--font-weight-medium);
@@ -173,7 +172,7 @@
 
 /* Button Variants */
 .btn-primary {
-  background-color: var(--color-neutral-black);
+  background: var(--neutral-black, #000);
   color: var(--color-text-inverse);
   border-radius: 28px;
 }
@@ -181,6 +180,7 @@
 .btn-primary:hover:not(:disabled) {
   opacity: 0.8;
   border-radius: 8px;
+  background: var(--neutral-black, #000);
 }
 
 .btn-secondary {
