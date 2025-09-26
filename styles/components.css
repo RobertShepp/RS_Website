@@ -8,7 +8,7 @@
   transform: translateX(-50%);
   z-index: var(--z-sticky);
   display: flex;
-  width: calc(10 * (100vw - 2 * var(--grid-margin-mobile)) / var(--grid-columns-mobile) + 9 * var(--grid-gutter));
+  width: calc(4 * (100vw - 2 * var(--grid-margin-mobile)) / var(--grid-columns-mobile) + 3 * var(--grid-gutter));
   padding: 16px 40px 16px 24px;
   justify-content: space-between;
   align-items: center;
@@ -88,7 +88,7 @@
 /* Header responsive */
 @media (min-width: 768px) {
   .header {
-    width: calc(10 * (100vw - 2 * var(--grid-margin-tablet)) / var(--grid-columns-tablet) + 9 * var(--grid-gutter));
+    width: calc(8 * (100vw - 2 * var(--grid-margin-tablet)) / var(--grid-columns-tablet) + 7 * var(--grid-gutter));
   }
 }
 
@@ -101,15 +101,39 @@
 @media (max-width: 768px) {
   .header {
     top: 24px;
+    width: calc(4 * (100vw - 2 * var(--grid-margin-mobile)) / var(--grid-columns-mobile) + 3 * var(--grid-gutter));
     padding: 12px 24px 12px 16px;
   }
   
   .header-title {
-    font-size: var(--font-size-paragraph);
+    display: none; /* Hide "Robert Sheppard" text on mobile */
   }
   
-  .nav-list {
-    gap: var(--space-s);
+  .header-nav {
+    display: none; /* Hide navigation on mobile */
+  }
+  
+  .burger-menu {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .burger-icon {
+    width: 40px;
+    height: 40px;
+    fill: var(--color-neutral-grey);
+  }
+}
+
+/* Hide burger menu on desktop/tablet */
+@media (min-width: 769px) {
+  .burger-menu {
+    display: none;
   }
 }
 
