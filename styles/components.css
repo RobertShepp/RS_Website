@@ -321,6 +321,13 @@
 
 /* Blog Card Grid Layout - Now using main grid system */
 
+/* Mobile card layout - single column, full width */
+@media (max-width: 767px) {
+  .blog-card {
+    grid-column: 1 / -1 !important; /* Full width on mobile */
+  }
+}
+
 .card-header {
   margin-bottom: var(--space-xs);
 }
