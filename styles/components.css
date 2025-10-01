@@ -319,21 +319,7 @@
   order: 3; /* Move to bottom */
 }
 
-/* Blog Card Grid Layout */
-.blog-card-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px 80px; /* 24px horizontal, 80px vertical for mobile/tablet */
-  align-items: start;
-}
-
-@media (min-width: 1024px) {
-  .blog-card-grid {
-    grid-template-columns: 1fr 1fr; /* 2 columns on desktop */
-    gap: 16px 80px; /* 16px horizontal gutter, 80px vertical spacing */
-    align-items: start;
-  }
-}
+/* Blog Card Grid Layout - Now using main grid system */
 
 .card-header {
   margin-bottom: var(--space-xs);
