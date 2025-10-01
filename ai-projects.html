@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robert Sheppard - AI Projects & Design</title>
+    <title>AI Projects - Robert Sheppard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -23,10 +23,13 @@
             <nav class="header-nav">
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a href="#ai-projects" class="nav-link">AI Projects</a>
+                        <a href="index.html" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contact" class="nav-link">Contact</a>
+                        <a href="ai-projects.html" class="nav-link">AI Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">Contact</a>
                     </li>
                 </ul>
             </nav>
@@ -39,26 +42,20 @@
     </header>
 
     <main class="container section">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="grid">
-                <div class="hero-content col-span-4 col-span-tablet-8 col-span-desktop-8" style="grid-column: 2 / 10;">
-                    <h1>I'm Robert Sheppard, an experienced Lead UX/UI and Product Designer.</h1>
-                    <h3>I've delivered digital experiences for brands like Ford, Heathrow, and Hitachi, specialising in the discovery and design of products that balance user needs with business goals.<br>This is my space for AI experimentation and learning.</h3>
-                    <div class="hero-actions" style="margin-top: var(--space-m);">
-                        <a href="https://robertsheppard.design/" class="btn btn-primary">Go to my work portfolio</a>
-                    </div>
+        <div class="grid">
+            <!-- Page Header -->
+            <div class="page-header" style="grid-column: 2 / 12;">
+                <h1>AI Projects</h1>
+                <p>Exploring the intersection of artificial intelligence, design systems, and user experience through practical projects and insights.</p>
+            </div>
+
+            <!-- All Projects Grid -->
+            <div class="projects-grid" style="grid-column: 2 / 12; margin-top: var(--space-l);">
+                <div class="grid" style="row-gap: 80px;" id="ai-projects-cards">
+                    <!-- Cards will be dynamically generated here -->
                 </div>
             </div>
-        </section>
-
-        <!-- Featured Projects Section -->
-        <section class="featured-projects" style="margin-top: var(--space-xl);">
-            <div class="grid" style="row-gap: 80px;" id="featured-projects-cards">
-                <!-- Cards will be dynamically generated here -->
-            </div>
-        </section>
-
+        </div>
     </main>
 
     <!-- Spacer -->

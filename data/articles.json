@@ -1,0 +1,70 @@
+{
+  "articles": [
+    {
+      "id": "building-intelligent-chatbots",
+      "title": "Building Intelligent Chatbots with Modern AI",
+      "category": "AI Projects",
+      "intro": "Exploring the intersection of artificial intelligence, design systems, and user experience through practical projects and insights.",
+      "heroImage": "images/articles/hero-placeholder.jpg",
+      "cardImage": "images/articles/card-placeholder.jpg",
+      "date": "2025-01-15",
+      "readTime": "5 min read",
+      "featured": true
+    },
+    {
+      "id": "ai-design-systems",
+      "title": "AI-Powered Design Systems",
+      "category": "AI Projects",
+      "intro": "How artificial intelligence is revolutionizing the way we create and maintain design systems for better user experiences.",
+      "heroImage": "images/articles/hero-placeholder.jpg",
+      "cardImage": "images/articles/card-placeholder.jpg",
+      "date": "2025-01-10",
+      "readTime": "7 min read",
+      "featured": true
+    },
+    {
+      "id": "machine-learning-ux",
+      "title": "Machine Learning in UX Design",
+      "category": "AI Projects",
+      "intro": "Practical applications of machine learning algorithms to enhance user experience design and personalization.",
+      "heroImage": "images/articles/hero-placeholder.jpg",
+      "cardImage": "images/articles/card-placeholder.jpg",
+      "date": "2025-01-05",
+      "readTime": "6 min read",
+      "featured": true
+    },
+    {
+      "id": "neural-networks-visualization",
+      "title": "Visualizing Neural Networks",
+      "category": "AI Projects",
+      "intro": "Creating intuitive visual representations of complex neural network architectures for better understanding and communication.",
+      "heroImage": "images/articles/hero-placeholder.jpg",
+      "cardImage": "images/articles/card-placeholder.jpg",
+      "date": "2024-12-28",
+      "readTime": "8 min read",
+      "featured": true
+    },
+    {
+      "id": "ai-content-generation",
+      "title": "AI Content Generation Tools",
+      "category": "AI Projects",
+      "intro": "Exploring the capabilities and limitations of AI-powered content generation tools in modern web development.",
+      "heroImage": "images/articles/hero-placeholder.jpg",
+      "cardImage": "images/articles/card-placeholder.jpg",
+      "date": "2024-12-20",
+      "readTime": "4 min read",
+      "featured": false
+    },
+    {
+      "id": "automated-testing-ai",
+      "title": "Automated Testing with AI",
+      "category": "AI Projects",
+      "intro": "How artificial intelligence is transforming software testing processes and improving code quality.",
+      "heroImage": "images/articles/hero-placeholder.jpg",
+      "cardImage": "images/articles/card-placeholder.jpg",
+      "date": "2024-12-15",
+      "readTime": "9 min read",
+      "featured": false
+    }
+  ]
+}

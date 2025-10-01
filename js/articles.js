@@ -1,32 +1,96 @@
+// Articles Management System
+class ArticlesManager {
+  constructor() {
+    this.articles = [];
+    this.maxHomepageCards = 4;
+  }
+
+  // Load articles from JSON file
+  async loadArticles() {
+    try {
+      const response = await fetch('data/articles.json');
+      const data = await response.json();
+      this.articles = data.articles;
+      return this.articles;
+    } catch (error) {
+      console.error('Error loading articles:', error);
+      return [];
+    }
+  }
+
+  // Get featured articles for homepage (max 4)
+  getFeaturedArticles() {
+    return this.articles
+      .filter(article => article.featured)
+      .slice(0, this.maxHomepageCards);
+  }
+
+  // Get all articles for AI Projects page
+  getAllArticles() {
+    return this.articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+  }
+
+  // Get article by ID
+  getArticleById(id) {
+    return this.articles.find(article => article.id === id);
+  }
+
+  // Generate article card HTML
+  generateArticleCard(article) {
+    return `
+      <article class="blog-card col-span-4 col-span-tablet-4 col-span-desktop-5">
+        <div class="blog-card-image">
+          <img src="${article.cardImage}" alt="${article.title}" style="width: 100%; height: 200px; object-fit: cover; background-color: var(--color-background-tertiary);">
+        </div>
+        <div class="blog-card-content">
+          <div class="blog-card-description">
+            <span class="blog-card-category">${article.category}</span>
+          </div>
+          <h3 class="blog-card-title">
+            <a href="articles/${article.id}.html">${article.title}</a>
+          </h3>
+          <div class="blog-card-button">
+            <a href="articles/${article.id}.html" class="btn btn-secondary">Read Article</a>
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  // Generate article page HTML from template
+  generateArticlePage(article) {
+    const template = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robert Sheppard - AI Projects & Design</title>
+    <title>${article.title} - Robert Sheppard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/design-tokens.css">
-    <link rel="stylesheet" href="styles/base.css">
-    <link rel="stylesheet" href="styles/components.css">
-    <script src="js/articles.js" defer></script>
+    <link rel="stylesheet" href="../styles/design-tokens.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/components.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="header-container">
             <div class="header-brand">
-                <img src="logo.png" alt="Robert Sheppard" class="header-logo">
+                <img src="../logo.png" alt="Robert Sheppard" class="header-logo">
                 <span class="header-title">Robert Sheppard</span>
             </div>
             <nav class="header-nav">
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a href="#ai-projects" class="nav-link">AI Projects</a>
+                        <a href="../index.html" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contact" class="nav-link">Contact</a>
+                        <a href="../ai-projects.html" class="nav-link">AI Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../contact.html" class="nav-link">Contact</a>
                     </li>
                 </ul>
             </nav>
@@ -39,26 +103,26 @@
     </header>
 
     <main class="container section">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="grid">
-                <div class="hero-content col-span-4 col-span-tablet-8 col-span-desktop-8" style="grid-column: 2 / 10;">
-                    <h1>I'm Robert Sheppard, an experienced Lead UX/UI and Product Designer.</h1>
-                    <h3>I've delivered digital experiences for brands like Ford, Heathrow, and Hitachi, specialising in the discovery and design of products that balance user needs with business goals.<br>This is my space for AI experimentation and learning.</h3>
-                    <div class="hero-actions" style="margin-top: var(--space-m);">
-                        <a href="https://robertsheppard.design/" class="btn btn-primary">Go to my work portfolio</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="grid">
+            <!-- Article Header -->
+            <article class="article-header" style="grid-column: 2 / 12;">
+                <h4 class="article-category">${article.category}</h4>
+                <h1 class="article-title">${article.title}</h1>
+                <h3 class="article-intro">${article.intro}</h3>
+            </article>
 
-        <!-- Featured Projects Section -->
-        <section class="featured-projects" style="margin-top: var(--space-xl);">
-            <div class="grid" style="row-gap: 80px;" id="featured-projects-cards">
-                <!-- Cards will be dynamically generated here -->
+            <!-- Hero Image -->
+            <div class="article-hero-image" style="grid-column: 1 / -1; margin: var(--space-m) 0;">
+                <img src="../${article.heroImage}" alt="${article.title}" style="width: 100%; height: 400px; object-fit: cover; background-color: var(--color-background-tertiary);">
             </div>
-        </section>
 
+            <!-- Article Content -->
+            <div class="article-content" style="grid-column: 2 / 12;">
+                <!-- Content will be added here -->
+                <h4>Article Content</h4>
+                <p>This is where the article content will go. You can add your content here.</p>
+            </div>
+        </div>
     </main>
 
     <!-- Spacer -->
@@ -110,3 +174,76 @@
     </footer>
 </body>
 </html>
+    `;
+    return template;
+  }
+
+  // Render homepage cards
+  async renderHomepageCards() {
+    const articles = this.getFeaturedArticles();
+    const container = document.getElementById('featured-projects-cards');
+    
+    if (container) {
+      container.innerHTML = articles.map(article => this.generateArticleCard(article)).join('');
+    }
+  }
+
+  // Render AI Projects page cards
+  async renderAIProjectsCards() {
+    const articles = this.getAllArticles();
+    const container = document.getElementById('ai-projects-cards');
+    
+    if (container) {
+      container.innerHTML = articles.map(article => this.generateArticleCard(article)).join('');
+    }
+  }
+
+  // Add new article to data
+  addArticle(articleData) {
+    const newArticle = {
+      id: articleData.id || this.generateId(articleData.title),
+      title: articleData.title,
+      category: articleData.category || 'AI Projects',
+      intro: articleData.intro,
+      heroImage: articleData.heroImage || 'images/articles/hero-placeholder.jpg',
+      cardImage: articleData.cardImage || 'images/articles/card-placeholder.jpg',
+      date: articleData.date || new Date().toISOString().split('T')[0],
+      readTime: articleData.readTime || '5 min read',
+      featured: articleData.featured !== undefined ? articleData.featured : true
+    };
+
+    this.articles.unshift(newArticle); // Add to beginning
+    return newArticle;
+  }
+
+  // Generate ID from title
+  generateId(title) {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim();
+  }
+}
+
+// Initialize articles manager
+const articlesManager = new ArticlesManager();
+
+// Load articles and render cards when DOM is ready
+document.addEventListener('DOMContentLoaded', async () => {
+  await articlesManager.loadArticles();
+  
+  // Render homepage cards if on homepage
+  if (document.getElementById('featured-projects-cards')) {
+    await articlesManager.renderHomepageCards();
+  }
+  
+  // Render AI Projects cards if on AI Projects page
+  if (document.getElementById('ai-projects-cards')) {
+    await articlesManager.renderAIProjectsCards();
+  }
+});
+
+// Export for use in other scripts
+window.articlesManager = articlesManager;
