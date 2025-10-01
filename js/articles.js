@@ -36,9 +36,13 @@ class ArticlesManager {
   }
 
   // Generate article card HTML
-  generateArticleCard(article) {
+  generateArticleCard(article, index = 0) {
+    // Calculate grid positioning for desktop (2 columns, 5 columns wide each)
+    const isEven = index % 2 === 0;
+    const gridColumn = isEven ? '2 / 7' : '7 / 12';
+    
     return `
-      <article class="blog-card col-span-4 col-span-tablet-4 col-span-desktop-5">
+      <article class="blog-card col-span-4 col-span-tablet-4 col-span-desktop-5" style="grid-column: 2 / 6; grid-column: ${gridColumn};">
         <div class="blog-card-image">
           <img src="${article.cardImage}" alt="${article.title}" style="width: 100%; height: 200px; object-fit: cover; background-color: var(--color-background-tertiary);">
         </div>
@@ -47,7 +51,7 @@ class ArticlesManager {
             <span class="blog-card-category">${article.category}</span>
           </div>
           <h3 class="blog-card-title">
-            <a href="articles/${article.id}.html">${article.title}</a>
+            ${article.title}
           </h3>
           <div class="blog-card-button">
             <a href="articles/${article.id}.html" class="btn btn-secondary">Read Article</a>
@@ -184,7 +188,7 @@ class ArticlesManager {
     const container = document.getElementById('featured-projects-cards');
     
     if (container) {
-      container.innerHTML = articles.map(article => this.generateArticleCard(article)).join('');
+      container.innerHTML = articles.map((article, index) => this.generateArticleCard(article, index)).join('');
     }
   }
 
@@ -194,7 +198,7 @@ class ArticlesManager {
     const container = document.getElementById('ai-projects-cards');
     
     if (container) {
-      container.innerHTML = articles.map(article => this.generateArticleCard(article)).join('');
+      container.innerHTML = articles.map((article, index) => this.generateArticleCard(article, index)).join('');
     }
   }
 

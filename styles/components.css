@@ -86,6 +86,11 @@
   outline-offset: 2px;
 }
 
+.nav-link.active {
+  color: var(--color-text-inverse);
+  text-decoration: underline;
+}
+
 /* Header responsive */
 @media (min-width: 768px) {
   .header {
@@ -314,7 +319,7 @@
 }
 
 .blog-card-button {
-  margin-top: var(--space-xxs);
+  margin-top: var(--space-s);
   padding: 0;
   order: 3; /* Move to bottom */
 }
