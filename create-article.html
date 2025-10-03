@@ -104,6 +104,22 @@
                         </div>
                     </div>
 
+                    <!-- Article Content Sections -->
+                    <div class="form-group">
+                        <label class="form-label">Article Content</label>
+                        <div class="content-builder">
+                            <div class="content-sections" id="contentSections">
+                                <!-- Content sections will be added here dynamically -->
+                            </div>
+                            <div class="content-actions">
+                                <button type="button" id="addTextSection" class="btn-secondary small">+ Add Text Section</button>
+                                <button type="button" id="addImageSection" class="btn-secondary small">+ Add Image Section</button>
+                                <button type="button" id="addImageGrid" class="btn-secondary small">+ Add Image Grid</button>
+                            </div>
+                        </div>
+                        <small class="form-help">Build your article content with text sections and inline images</small>
+                    </div>
+
                     <div class="form-group">
                         <label class="form-checkbox">
                             <input type="checkbox" id="featured" name="featured" checked>
@@ -253,6 +269,386 @@
                 }
             });
 
+            // Content Builder functionality
+            const contentSections = document.getElementById('contentSections');
+            let sectionCounter = 0;
+
+            function createContentSection(type, content = '') {
+                sectionCounter++;
+                const sectionId = `section-${sectionCounter}`;
+                
+                switch(type) {
+                    case 'text':
+                        return createTextSection(sectionId, content);
+                    case 'image':
+                        return createImageSection(sectionId, content);
+                    case 'imageGrid':
+                        return createImageGridSection(sectionId, content);
+                    default:
+                        return null;
+                }
+            }
+
+            function createTextSection(id, content = '') {
+                const section = document.createElement('div');
+                section.className = 'content-section text-section';
+                section.innerHTML = `
+                    <div class="section-header">
+                        <span class="section-type">Text Section</span>
+                        <button type="button" class="btn-remove-section" onclick="removeSection('${id}')">×</button>
+                    </div>
+                    <div class="section-content">
+                        <input type="text" placeholder="Section heading (optional)" class="form-input" data-field="heading">
+                        <textarea placeholder="Paste your content here - formatting will be cleaned..." class="form-textarea pastable-textarea" rows="4" data-field="content">${content}</textarea>
+                    </div>
+                `;
+                section.id = id;
+                section.dataset.type = 'text';
+                return section;
+            }
+
+            function createImageSection(id, content = '') {
+                const section = document.createElement('div');
+                section.className = 'content-section image-section';
+                section.innerHTML = `
+                    <div class="section-header">
+                        <span class="section-type">Single Image</span>
+                        <button type="button" class="btn-remove-section" onclick="removeSection('${id}')">×</button>
+                    </div>
+                    <div class="section-content">
+                        <input type="file" accept="image/*" class="form-input image-upload" data-field="image">
+                        <input type="text" placeholder="Image alt text" class="form-input" data-field="alt">
+                        <small class="form-help">Full-width image that will span the article width</small>
+                    </div>
+                `;
+                section.id = id;
+                section.dataset.type = 'image';
+                return section;
+            }
+
+            function createImageGridSection(id, content = '') {
+                const section = document.createElement('div');
+                section.className = 'content-section image-grid-section';
+                section.innerHTML = `
+                    <div class="section-header">
+                        <span class="section-type">Image Grid (2 images)</span>
+                        <button type="button" class="btn-remove-section" onclick="removeSection('${id}')">×</button>
+                    </div>
+                    <div class="section-content">
+                        <div class="grid-upload">
+                            <div class="grid-image">
+                                <label>Image 1:</label>
+                                <input type="file" accept="image/*" class="form-input image-upload" data-field="image1">
+                                <input type="text" placeholder="Alt text" class="form-input" data-field="alt1">
+                            </div>
+                            <div class="grid-image">
+                                <label>Image 2:</label>
+                                <input type="file" accept="image/*" class="form-input image-upload" data-field="image2">
+                                <input type="text" placeholder="Alt text" class="form-input" data-field="alt2">
+                            </div>
+                        </div>
+                        <small class="form-help">Two images that will display side-by-side</small>
+                    </div>
+                `;
+                section.id = id;
+                section.dataset.type = 'imageGrid';
+                return section;
+            }
+
+            function removeSection(sectionId) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.remove();
+                }
+            }
+
+            // Make removeSection globally available
+            window.removeSection = removeSection;
+
+            // Helper functions for form submission
+            function collectContentSections() {
+                const sections = [];
+                const sectionElements = contentSections.querySelectorAll('.content-section');
+                
+                sectionElements.forEach(section => {
+                    const type = section.dataset.type;
+                    const sectionData = { type };
+                    
+                    switch(type) {
+                        case 'text':
+                            sectionData.heading = section.querySelector('[data-field="heading"]').value;
+                            sectionData.headingValue = section.querySelector('[data-field="content"]').value;
+                            break;
+                        case 'image':
+                            sectionData.altText = section.querySelector('[data-field="alt"]').value;
+                            sectionData.imageFile = section.querySelector('[data-field="image"]').files[0];
+                            break;
+                        case 'imageGrid':
+                            sectionData.alt1Text = section.querySelector('[data-field="alt1"]').value;
+                            sectionData.alt2Text = section.querySelector('[data-field="alt2"]').value;
+                            sectionData.image1File = section.querySelector('[data-field="image1"]').files[0];
+                            sectionData.image2File = section.querySelector('[data-field="image2"]').files[0];
+                            break;
+                    }
+                    sections.push(sectionData);
+                });
+                
+                return sections;
+            }
+
+            function generateFilename(title) {
+                return title
+                    .toLowerCase()
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    .trim() + '.html';
+            }
+
+            function generateArticleHTML(articleData, contentSections) {
+                const currentDate = new Date().toISOString().split('T')[0];
+                
+                let contentHTML = '';
+                contentSections.forEach(section => {
+                    switch(section.type) {
+                        case 'text':
+                            if (section.headingValue) {
+                                contentHTML += section.heading ? `<h4>${section.heading}</h4>` : '';
+                                contentHTML += `<p>${section.headingValue.replace(/\n/g, '</p><p>')}</p>`;
+                            }
+                            break;
+                        case 'image':
+                            contentHTML += `<div class="article-image-full" style="margin: var(--space-l) 0;">
+                                <img src="../images/articles/${section.imageFile ? section.imageFile.name : 'placeholder.jpg'}" alt="${section.altText || ''}" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background-color: var(--color-background-tertiary);">
+                            </div>`;
+                            break;
+                        case 'imageGrid':
+                            contentHTML += `<div class="article-image-grid" style="margin: var(--space-l) 0;">
+                                <div class="grid" style="gap: 16px;">
+                                    <div class="article-image col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1; grid-column: 1 / 7;">
+                                        <img src="../images/articles/${section.image1File ? section.image1File.name : 'placeholder1.jpg'}" alt="${section.alt1Text || ''}" style="width: 100%; height: 300px; object-fit: cover; background-color: var(--color-background-tertiary);">
+                                    </div>
+                                    <div class="article-image col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1; grid-column: 7 / 13;">
+                                        <img src="../images/articles/${section.image2File ? section.image2File.name : 'placeholder2.jpg'}" alt="${section.alt2Text || ''}" style="width: 100%; height: 300px; object-fit: cover; background-color: var(--color-background-tertiary);">
+                                    </div>
+                                </div>
+                            </div>`;
+                            break;
+                    }
+                });
+
+                return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${articleData.title} - Robert Sheppard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/design-tokens.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <script src="../js/mobile-nav.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-brand">
+                <img src="../logo.png" alt="Robert Sheppard" class="header-logo">
+                <span class="header-title">Robert Sheppard</span>
+            </div>
+            <nav class="header-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="../index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../ai-projects.html" class="nav-link active">AI Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../create-article.html" class="nav-link">Create Article</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+            <button class="burger-menu" aria-label="Open navigation menu" aria-expanded="false">
+                <svg class="burger-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay"></div>
+    
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" aria-hidden="true">
+        <div class="mobile-nav-header">
+            <span class="mobile-nav-title">Menu</span>
+            <button class="mobile-nav-close" aria-label="Close navigation menu">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+        <div class="mobile-nav-content">
+            <ul class="mobile-nav-list">
+                <li class="mobile-nav-item">
+                    <a href="../index.html" class="mobile-nav-link">Home</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="../ai-projects.html" class="mobile-nav-link active">AI Projects</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="../create-article.html" class="mobile-nav-link">Create Article</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="../contact.html" class="mobile-nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container section">
+        <div class="grid">
+            <!-- Article Header -->
+            <article class="article-header col-span-4 col-span-tablet-8 col-span-desktop-10" style="grid-column: 1 / -1; grid-column: 2 / 12;">
+                <h4 class="article-category">${articleData.category}</h4>
+                <h1 class="article-title">${articleData.title}</h1>
+                <h3 class="article-intro">${articleData.intro}</h3>
+            </article>
+
+            <!-- Hero Image -->
+            <div class="col-span-4 col-span-tablet-8 col-span-desktop-10" style="grid-column: 1 / -1; grid-column: 2 / 12; margin: var(--space-m) 0 0 0;">
+                <img src="${articleData.heroImage}" alt="Article hero image" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background-color: var(--color-background-tertiary);">
+            </div>
+
+            <!-- Article Content -->
+            <div class="article-content col-span-4 col-span-tablet-8 col-span-desktop-10" style="grid-column: 1 / -1; grid-column: 2 / 12;">
+                ${contentHTML}
+            </div>
+        </div>
+    </main>
+
+    <!-- Spacer -->
+    <div style="height: var(--space-xl);"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-copyright">
+            <p style="color: var(--color-text-inverse); font-size: 14px; margin: 0; line-height: 1;">©2025 Robert Sheppard Design Limited</p>
+        </div>
+        
+        <div class="footer-contact">
+            <a href="mailto:hello@robertsheppard.design" style="color: var(--color-text-inverse); text-decoration: underline; font-size: 14px;">hello@robertsheppard.design</a>
+        </div>
+        
+        <div class="footer-social">
+            <div style="display: flex; gap: var(--space-xs);">
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/robert-sheppard-7701582/" target="_blank" rel="noopener noreferrer">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#F3F4F6"/>
+                        <g clip-path="url(#clip0_13_1318)">
+                            <path d="M10.3306 16.6391H14.4766V30H10.3306V16.6391ZM12.4105 10C13.7328 10 14.8072 11.0766 14.8072 12.4017C14.8072 13.7267 13.7328 14.8171 12.4105 14.8171C11.0882 14.8171 10 13.7405 10 12.4017C10 11.0628 11.0744 10 12.4105 10ZM17.0799 30H21.2259V23.3885C21.2259 21.6494 21.5565 19.9655 23.719 19.9655C25.8815 19.9655 25.8678 21.9531 25.8678 23.5128V30.0138H30.0138V22.6846C30.0138 19.0821 29.2424 16.3216 25.0413 16.3216C23.0303 16.3216 21.6667 17.4258 21.1157 18.4748H21.0606V16.6529H17.0799V30.0138V30Z" fill="black"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_13_1318">
+                                <rect width="20" height="20" fill="white" transform="translate(10 10)"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </a>
+                
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/robertsheppard_design/" target="_blank" rel="noopener noreferrer">           
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#F3F4F6"/>
+                        <g clip-path="url(#clip0_13_1319)">
+                            <path d="M20 10C22.7208 10 23.0611 10.0003 24.1221 10.0547C25.1831 10.0955 25.9046 10.2718 26.5439 10.5166C27.197 10.7751 27.7547 11.116 28.3125 11.6738C28.8703 12.2317 29.2112 12.7893 29.4697 13.4424C29.7146 14.0682 29.8772 14.8032 14.0818 10.2718 14.8169 10.1091 15.8779 10.0547C16.9388 10.0003 17.2792 10 20 10ZM20 11.7959C17.3333 11.7959 17.0202 11.7962 15.959 11.8506C14.9795 13.8914 14.4484 12.0544 14.0947 12.1904C13.6188 12.3673 13.2921 12.5848 12.9385 12.9385C12.5847 13.2922 12.3673 13.6331 12.1904 14.0957C12.0544 14.4494 11.8914 14.9652 11.8506 15.959C11.7962 17.0066 11.7959 17.3333 11.7959 20C11.7959 22.6667 11.7962 22.9818 11.8506 24.045C11.8914 25.0281 12.0544 25.5506 12.1904 25.9043C12.3673 26.3805 12.5847 26.7078 12.9385 27.0615C13.2921 27.4152 13.6324 27.6327 14.0947 27.8096C14.4484 27.9456 14.9795 28.1086 15.959 28.1494C17.0066 28.2038 17.3333 28.2041 20 28.2041C22.6666 28.2041 22.9798 28.2038 24.041 28.1494C25.0201 28.1086 25.5506 27.9456 25.9043 27.8096C26.3805 27.6327 26.7078 27.4153 27.0615 27.0615C27.4153 26.7078 27.6327 26.3669 27.8096 25.9043C27.9456 25.5506 28.1086 25.0201 28.1494 24.041C28.2038 22.9934 28.2041 22.6667 28.2041 20C28.2041 17.3333 28.2038 17.0202 28.1494 15.959C28.1086 14.9799 27.9456 14.4494 27.8096 14.0957C17.6327 13.6195 27.4153 13.2922 27.0615 12.9385C26.7078 12.5847 26.3669 12.3673 25.9043 12.1904C25.5506 12.0544 25.0201 11.8914 24.041 11.8506C22.9934 11.7962 22.6666 11.7959 20 11.7959ZM20 14.8711C22.8435 14.8711 25.1426 17.1701 25.1426 20.0137C25.1425 22.8572 22.8435 25.1562 20 25.1562C17.1565 25.1562 14.8575 22.8572 14.8574 20.0137C14.8574 17.1701 17.1701 14.8711 20 14.8711ZM20 16.6807C18.1633 16.6807 16.667 18.1769 16.667 20.0137C16.667 21.8504 18.1633 23.3467 20 23.3467C21.8367 23.3467 23.333 21.8504 23.333 20.0137C23.333 18.1769 21.8367 16.6807 20 16.6807ZM25.3467 13.4697C26.0079 13.4697 26.5439 14.0058 26.5439 14.667C26.5438 15.3281 26.0078 15.8643 25.3467 15.8643C24.6857 15.8641 24.1496 15.328 24.1494 14.667C24.1494 24.0058 24.6855 13.4698 25.3467 13.4697Z" fill="black"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_13_1319">
+                                <rect width="20" height="20" fill="white" transform="translate(10 10)"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>`;
+            }
+
+            function updateArticlesJSON(articleData, filename) {
+                const newArticle = {
+                    id: filename.replace('.html', ''),
+                    title: articleData.title,
+                    category: articleData.category,
+                    intro: articleData.intro,
+                    heroImage: articleData.heroImage,
+                    cardImage: articleData.cardImage,
+                    date: new Date().toISOString().split('T')[0],
+                    readTime: "5 min read",
+                    featured: articleData.featured === 'true'
+                };
+                
+                // This would update the JSON in a real implementation
+                console.log('New article data:', newArticle);
+                
+                // For now, we'll show the user what to add
+                alert(`To make your article appear on the website:\n\n1. Open data/articles.json\n2. Add this article data to the articles array:\n\n${JSON.stringify(newArticle, null, 2)}`);
+            }
+
+            function downloadHTMLFile(htmlContent, filename) {
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+
+            // Add section buttons
+            document.getElementById('addTextSection').addEventListener('click', () => {
+                const section = createContentSection('text');
+                contentSections.appendChild(section);
+                setupSectionPasteListener(section);
+            });
+
+            document.getElementById('addImageSection').addEventListener('click', () => {
+                const section = createContentSection('image');
+                contentSections.appendChild(section);
+            });
+
+            document.getElementById('addImageGrid').addEventListener('click', () => {
+                const section = createContentSection('imageGrid');
+                contentSections.appendChild(section);
+            });
+
+            function setupSectionPasteListener(section) {
+                const textarea = section.querySelector('.form-textarea');
+                if (textarea) {
+                    textarea.addEventListener('paste', function(e) {
+                        setTimeout(() => {
+                            const cleanedText = cleanPastedText(this.value);
+                            if (cleanedText !== this.value) {
+                                this.value = cleanedText;
+                            }
+                        }, 0);
+                    });
+                }
+            }
+
             // Handle image file selection
             heroImageFile.addEventListener('change', function(e) {
                 const file = e.target.files[0];
@@ -331,13 +727,20 @@
                 }
                 
                 if (articleData.title && articleData.intro && selectedImageData) {
-                    const generator = new ArticleGenerator();
-                    const result = generator.generateArticlePage(articleData);
+                    // Collect content sections
+                    const contentSectionsData = collectContentSections();
                     
-                    // Add to data
-                    generator.addArticleToData(articleData);
+                    // Generate article HTML content
+                    const articleHTML = generateArticleHTML(articleData, contentSectionsData);
+                    const filename = generateFilename(articleData.title);
                     
-                    alert(`Article "${result.article.title}" created successfully!\n\nFilename: ${result.filename}\n\nNote: In a real implementation, this would:\n1. Save the HTML file to the articles folder\n2. Upload and save the image file\n3. Update the articles.json file\n4. Refresh the homepage and AI Projects page`);
+                    // Update articles.json data
+                    updateArticlesJSON(articleData, filename);
+                    
+                    // Create download link for the HTML file
+                    downloadHTMLFile(articleHTML, filename);
+                    
+                    alert(`Article "${articleData.title}" created successfully!\n\nHTML file downloaded: ${filename}\n\nNext steps:\n1. Save the downloaded HTML file to your articles/ folder\n2. Refresh your homepage and AI Projects page to see the new article`);
                     
                     // Reset form
                     form.reset();
@@ -345,6 +748,7 @@
                     selectedImageData = null;
                     heroPreview.innerHTML = '';
                     cardPreview.innerHTML = '';
+                    contentSections.innerHTML = '';
                 } else {
                     alert('Please fill in all required fields including selecting a hero image.');
                 }
@@ -515,6 +919,106 @@
         .pastable-textarea:focus {
             border-color: var(--color-border-focus);
             outline: none;
+        }
+
+        .content-builder {
+            border: 1px solid var(--color-border-primary);
+            border-radius: var(--radius-sm);
+            background: var(--color-background-secondary);
+        }
+
+        .content-sections {
+            padding: var(--space-s);
+            min-height: 100px;
+        }
+
+        .content-section {
+            margin-bottom: var(--space-s);
+            border: 1px solid var(--color-border-secondary);
+            border-radius: var(--radius-sm);
+            background: white;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-xs) var(--space-s);
+            background: var(--color-background-tertiary);
+            border-bottom: 1px solid var(--color-border-primary);
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+        }
+
+        .section-type {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text-secondary);
+        }
+
+        .btn-remove-section {
+            background: var(--color-error);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .btn-remove-section:hover {
+            background: #dc2626;
+        }
+
+        .section-content {
+            padding: var(--space-s);
+        }
+
+        .section-content .form-input,
+        .section-content .form-textarea {
+            margin-bottom: var(--space-xs);
+        }
+
+        .section-content label {
+            display: block;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            margin-bottom: var(--space-xs);
+            color: var(--color-text-secondary);
+        }
+
+        .grid-upload {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-s);
+        }
+
+        .grid-image {
+            border: 1px dashed var(--color-border-primary);
+            padding: var(--space-s);
+            border-radius: var(--radius-sm);
+        }
+
+        .content-actions {
+            padding: var(--space-s);
+            border-top: 1px solid var(--color-border-primary);
+            display: flex;
+            gap: var(--space-xs);
+        }
+
+        .btn-secondary.small {
+            font-size: var(--font-size-sm);
+            padding: var(--space-xs) var(--space-s);
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--color-text-tertiary);
+            padding: var(--space-l);
         }
     </style>
 </body>
