@@ -146,5 +146,38 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Initialize articles when page loads
+        document.addEventListener('DOMContentLoaded', async function() {
+            const articlesManager = new ArticlesManager();
+            await articlesManager.loadArticles();
+            
+            const featuredArticles = articlesManager.getFeaturedArticles();
+            const cardsContainer = document.getElementById('featured-projects-cards');
+            
+            if (featuredArticles.length > 0) {
+                cardsContainer.innerHTML = featuredArticles.map(article => `
+                    <div class="col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1;">
+                        <a href="articles/${article.id}.html" class="article-card">
+                            <div class="card-image">
+                                <img src="${article.cardImage}" alt="${article.title}" style="width: 100%; height: 200px; object-fit: cover;">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-category">${article.category}</span>
+                                <h3 class="card-title">${article.title}</h3>
+                                <p class="card-excerpt">${article.intro}</p>
+                                <div class="card-meta">
+                                    <span class="card-read-time">${article.readTime}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                `).join('');
+            } else {
+                cardsContainer.innerHTML = '<p style="text-align: center; color: var(--color-text-tertiary);">No featured articles available.</p>';
+            }
+        });
+    </script>
 </body>
 </html>
