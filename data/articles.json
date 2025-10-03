@@ -65,6 +65,17 @@
       "date": "2024-12-15",
       "readTime": "9 min read",
       "featured": false
+    },
+    {
+      "id": "getting-started-with-ai",
+      "title": "Getting started with AI",
+      "category": "AI Projects",
+      "intro": "I am going to use AI for this entire website project, from planning to design, coding and deployment. I started with the simplest of things - the website holding page.",
+      "heroImage": "images/articles/hero-placeholder.jpg",
+      "cardImage": "images/articles/card-placeholder.jpg",
+      "date": "2025-01-17",
+      "readTime": "6 min read",
+      "featured": true
     }
   ]
 }
