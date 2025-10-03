@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Robert Sheppard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/design-tokens.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <script src="js/mobile-nav.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-brand">
+                <img src="logo.png" alt="Robert Sheppard" class="header-logo">
+                <span class="header-title">Robert Sheppard</span>
+            </div>
+            <nav class="header-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="ai-projects.html" class="nav-link">AI Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link active">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+            <button class="burger-menu" aria-label="Open navigation menu" aria-expanded="false">
+                <svg class="burger-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay"></div>
+    
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" aria-hidden="true">
+        <div class="mobile-nav-header">
+            <span class="mobile-nav-title">Menu</span>
+            <button class="mobile-nav-close" aria-label="Close navigation menu">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+        <div class="mobile-nav-content">
+            <ul class="mobile-nav-list">
+                <li class="mobile-nav-item">
+                    <a href="index.html" class="mobile-nav-link">Home</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="ai-projects.html" class="mobile-nav-link">AI Projects</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="contact.html" class="mobile-nav-link active">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container section">
+        <!-- Contact Section -->
+        <section class="hero">
+            <div class="grid">
+                <div class="hero-content col-span-4 col-span-tablet-8 col-span-desktop-8" style="grid-column: 2 / 10;">
+                    <h1>Get in Touch</h1>
+                    <h3>Let's discuss your next project or explore opportunities to collaborate on AI-driven design solutions.</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Content -->
+        <section style="margin-top: var(--space-xl);">
+            <div class="grid">
+                <div class="col-span-4 col-span-tablet-8 col-span-desktop-10" style="grid-column: 2 / 12;">
+                    <div style="display: flex; flex-direction: column; gap: var(--space-l);">
+                        <!-- Contact Information -->
+                        <div>
+                            <h3>Contact Information</h3>
+                            <p>Feel free to reach out through any of these channels:</p>
+                            <div style="margin-top: var(--space-m); display: flex; flex-direction: column; gap: var(--space-s);">
+                                <p><strong>Portfolio:</strong> <a href="https://robertsheppard.design/" target="_blank" rel="noopener noreferrer">robertsheppard.design</a></p>
+                                <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/robert-sheppard-7701582/" target="_blank" rel="noopener noreferrer">robert-sheppard-7701582</a></p>
+                                <p><strong>Instagram:</strong> <a href="https://www.instagram.com/robertsheppard_design/" target="_blank" rel="noopener noreferrer">@robertsheppard_design</a></p>
+                            </div>
+                        </div>
+
+                        <!-- About -->
+                        <div>
+                            <h3>About This Space</h3>
+                            <p>This website serves as my experimental playground for AI projects and design system exploration. Here you'll find insights into the intersection of artificial intelligence, user experience design, and modern web technologies.</p>
+                            <p>I'm always interested in discussing new projects, sharing knowledge, and exploring innovative approaches to digital product design.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacer before footer -->
+        <div style="height: var(--space-xl);"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-title">Robert Sheppard</span>
+                    <p class="footer-description">Lead UX/UI and Product Designer</p>
+                </div>
+                <div class="footer-social">
+                    <div style="display: flex; gap: var(--space-xs);">
+                        <!-- LinkedIn -->
+                        <a href="https://www.linkedin.com/in/robert-sheppard-7701582/" target="_blank" rel="noopener noreferrer">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="40" height="40" rx="8" fill="var(--color-neutral-grey)"/>
+                                <path d="M14.5 12.5C14.5 13.3284 13.8284 14 13 14C12.1716 14 11.5 13.3284 11.5 12.5C11.5 11.6716 12.1716 11 13 11C13.8284 11 14.5 11.6716 14.5 12.5Z" fill="var(--color-background-primary)"/>
+                                <path d="M11.5 16H14.5V28H11.5V16Z" fill="var(--color-background-primary)"/>
+                                <path d="M17 16H19.5V17.5H19.75C20.25 16.75 21.25 16 22.75 16C25.75 16 26.5 17.75 26.5 20.5V28H23.5V21.25C23.5 20.25 23.25 19.5 22.25 19.5C21.25 19.5 20.5 20.25 20.5 21.25V28H17V16Z" fill="var(--color-background-primary)"/>
+                            </svg>
+                        </a>
+                        <!-- Instagram -->
+                        <a href="https://www.instagram.com/robertsheppard_design/" target="_blank" rel="noopener noreferrer">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="40" height="40" rx="8" fill="var(--color-neutral-grey)"/>
+                                <path d="M20 14C17.79 14 17.54 14.01 16.73 14.05C15.92 14.09 15.37 14.21 14.9 14.38C14.4 14.56 13.98 14.8 13.56 15.22C13.14 15.64 12.9 16.06 12.72 16.56C12.55 17.03 12.43 17.58 12.39 18.39C12.35 19.2 12.34 19.45 12.34 21.66C12.34 23.87 12.35 24.12 12.39 24.93C12.43 25.74 12.55 26.29 12.72 26.76C12.9 27.26 13.14 27.68 13.56 28.1C13.98 28.52 14.4 28.76 14.9 28.94C15.37 29.11 15.92 29.23 16.73 29.27C17.54 29.31 17.79 29.32 20 29.32C22.21 29.32 22.46 29.31 23.27 29.27C24.08 29.23 24.63 29.11 25.1 28.94C25.6 28.76 26.02 28.52 26.44 28.1C26.86 27.68 27.1 27.26 27.28 26.76C27.45 26.29 27.57 25.74 27.61 24.93C27.65 24.12 27.66 23.87 27.66 21.66C27.66 19.45 27.65 19.2 27.61 18.39C27.57 17.58 27.45 17.03 27.28 16.56C27.1 16.06 26.86 15.64 26.44 15.22C26.02 14.8 25.6 14.56 25.1 14.38C24.63 14.21 24.08 14.09 23.27 14.05C22.46 14.01 22.21 14 20 14ZM20 15.62C22.17 15.62 22.4 15.63 23.2 15.67C23.94 15.71 24.34 15.82 24.62 15.92C24.99 16.05 25.26 16.21 25.54 16.49C25.82 16.77 25.98 17.04 26.11 17.41C26.21 17.69 26.32 18.09 26.36 18.83C26.4 19.63 26.41 19.86 26.41 22.03C26.41 24.2 26.4 24.43 26.36 25.23C26.32 25.97 26.21 26.37 26.11 26.65C25.98 27.02 25.82 27.29 25.54 27.57C25.26 27.85 24.99 28.01 24.62 28.14C24.34 28.24 23.94 28.35 23.2 28.39C22.4 28.43 22.17 28.44 20 28.44C17.83 28.44 17.6 28.43 16.8 28.39C16.06 28.35 15.66 28.24 15.38 28.14C15.01 28.01 14.74 27.85 14.46 27.57C14.18 27.29 14.02 27.02 13.89 26.65C13.79 26.37 13.68 25.97 13.64 25.23C13.6 24.43 13.59 24.2 13.59 22.03C13.59 19.86 13.6 19.63 13.64 18.83C13.68 18.09 13.79 17.69 13.89 17.41C14.02 17.04 14.18 16.77 14.46 16.49C14.74 16.21 15.01 16.05 15.38 15.92C15.66 15.82 16.06 15.71 16.8 15.67C17.6 15.63 17.83 15.62 20 15.62Z" fill="var(--color-background-primary)"/>
+                                <path d="M20 17.84C18.73 17.84 17.51 18.35 16.63 19.23C15.75 20.11 15.24 21.33 15.24 22.6C15.24 23.87 15.75 25.09 16.63 25.97C17.51 26.85 18.73 27.36 20 27.36C21.27 27.36 22.49 26.85 23.37 25.97C24.25 25.09 24.76 23.87 24.76 22.6C24.76 21.33 24.25 20.11 23.37 19.23C22.49 18.35 21.27 17.84 20 17.84ZM20 25.74C19.16 25.74 18.36 25.41 17.76 24.81C17.16 24.21 16.83 23.41 16.83 22.57C16.83 21.73 17.16 20.93 17.76 20.33C18.36 19.73 19.16 19.4 20 19.4C20.84 19.4 21.64 19.73 22.24 20.33C22.84 20.93 23.17 21.73 23.17 22.57C23.17 23.41 22.84 24.21 22.24 24.81C21.64 25.41 20.84 25.74 20 25.74Z" fill="var(--color-background-primary)"/>
+                                <circle cx="25" cy="17.5" r="1.25" fill="var(--color-background-primary)"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+

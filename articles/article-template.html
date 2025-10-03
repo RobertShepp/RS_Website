@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../styles/design-tokens.css">
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/components.css">
+    <script src="../js/mobile-nav.js" defer></script>
 </head>
 <body>
     <!-- Header -->
@@ -32,13 +33,41 @@
                     </li>
                 </ul>
             </nav>
-            <button class="burger-menu" aria-label="Open navigation menu">
+            <button class="burger-menu" aria-label="Open navigation menu" aria-expanded="false">
                 <svg class="burger-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
         </div>
     </header>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay"></div>
+    
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" aria-hidden="true">
+        <div class="mobile-nav-header">
+            <span class="mobile-nav-title">Menu</span>
+            <button class="mobile-nav-close" aria-label="Close navigation menu">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+        <div class="mobile-nav-content">
+            <ul class="mobile-nav-list">
+                <li class="mobile-nav-item">
+                    <a href="../index.html" class="mobile-nav-link">Home</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="../ai-projects.html" class="mobile-nav-link active">AI Projects</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="../contact.html" class="mobile-nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <main class="container section">
         <div class="grid">
@@ -50,8 +79,8 @@
             </article>
 
             <!-- Hero Image -->
-            <div class="article-hero-image" style="grid-column: 1 / -1; margin: var(--space-m) 0;">
-                <img src="../images/articles/hero-placeholder.jpg" alt="Article hero image" style="width: 100%; height: 400px; object-fit: cover; background-color: var(--color-background-tertiary);">
+            <div class="col-span-4 col-span-tablet-8 col-span-desktop-10" style="grid-column: 1 / -1; grid-column: 2 / 12; margin: var(--space-m) 0 0 0;">
+                <img src="../images/articles/hero-placeholder.jpg" alt="Article hero image" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background-color: var(--color-background-tertiary);">
             </div>
 
             <!-- Article Content -->
