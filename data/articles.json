@@ -65,6 +65,17 @@
       "date": "2024-12-15",
       "readTime": "9 min read",
       "featured": false
+    },
+    {
+      "id": "how-i-got-started",
+      "title": "How I Got Started",
+      "category": "AI Projects",
+      "intro": "My journey into AI and web development - the story of how I began creating intelligent solutions.",
+      "heroImage": "images/articles/hero-placeholder.jpg",
+      "cardImage": "images/articles/card-placeholder.jpg",
+      "date": "2025-01-16",
+      "readTime": "6 min read",
+      "featured": true
     }
   ]
 }
