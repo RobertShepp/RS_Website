@@ -137,14 +137,13 @@
             const cardsContainer = document.getElementById('ai-projects-cards');
             
             if (allArticles.length > 0) {
-                cardsContainer.innerHTML = allArticles.map(article => `
+                let html = allArticles.map(article => `
                     <div class="col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1;">
                         <a href="articles/${article.id}.html" class="article-card">
-                            <div class="card-image">
-                                <img src="${article.cardImage}" alt="${article.title}" style="width: 100%; height: 200px; object-fit: cover;">
+                            <div class="card-image" style="background: linear-gradient(45deg, #f0f0f0, #e0e0e0); height: 200px; display: flex; align-items: center; justify-content: center;">
+                                <span style="color: #666;">No Image Available</span>
                             </div>
                             <div class="card-content">
-
                                 <span class="card-category">${article.category}</span>
                                 <h3 class="card-title">${article.title}</h3>
                                 <p class="card-excerpt">${article.intro}</p>
@@ -155,6 +154,7 @@
                         </a>
                     </div>
                 `).join('');
+                cardsContainer.innerHTML = html;
             } else {
                 cardsContainer.innerHTML = '<p style="text-align: center; color: var(--color-text-tertiary);">No articles available.</p>';
             }
