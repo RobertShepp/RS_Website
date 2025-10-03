@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Article - Robert Sheppard</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/design-tokens.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <script src="../js/mobile-nav.js" defer></script>
+    
+    <style>
+        .create-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--color-border-primary);
+            border-radius: 8px;
+            font-size: 16px;
+            background: var(--color-background-primary);
+            color: var(--color-text-primary);
+        }
+        
+        .btn-create {
+            background: var(--color-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .btn-create:hover {
+            background: var(--color-primary-dark);
+        }
+        
+        /* Fix header overlap */
+        .main {
+            position: relative;
+            z-index: 1;
+            padding-top: 100px;
+        }
+        
+        .header {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-content">
+                <div class="header-left">
+                    <a href="../index.html" class="header-logo">
+                        <img src="../logo.png" alt="Robert Sheppard Logo" width="200" height="60">
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="header-nav desktop-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="../ai-projects.html" class="nav-link">AI Projects</a></li>
+                        <li class="nav-item"><a href="../design-system.html" class="nav-link">Design System</a></li>
+                        <li class="nav-item"><a href="../contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <nav class="mobile-nav" id="mobileNav">
+                <ul class="mobile-nav-list">
+                    <li class="mobile-nav-item"><a href="../index.html" class="mobile-nav-link">Home</a></li>
+                    <li class="mobile-nav-item"><a href="../ai-projects.html" class="mobile-nav-link">AI Projects</a></li>
+                    <li class="mobile-nav-item"><a href="../design-system.html" class="mobile-nav-link">Design System</a></li>
+                    <li class="mobile-nav-item"><a href="../contact.html" class="mobile-nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="create-container">
+            <h1>Create New Article</h1>
+            
+            <form id="articleForm">
+                <div class="form-group">
+                    <label class="form-label" for="title">Title</label>
+                    <input type="text" id="title" name="title" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="intro">Introduction</label>
+                    <textarea id="intro" name="intro" rows="4" class="form-textarea" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="content">Article Content</label>
+                    <textarea id="content" name="content" rows="10" class="form-textarea" placeholder="Add your article content here..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-create">Create Article</button>
+            </form>
+            
+            <div id="result" style="margin-top: 2rem; padding: 1rem; background: #f0f0f0; border-radius: 8px; display: none;"></div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('articleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const title = formData.get('title');
+            const intro = formData.get('intro');
+            const content = formData.get('content');
+            
+            // Generate article ID from title
+            const id = title.toLowerCase().replace(/[^a-z0-9]/g, '-');
+            
+            // Generate article HTML
+            const articleHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title} - Robert Sheppard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/design-tokens.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <script src="../js/mobile-nav.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-content">
+                <div class="header-left">
+                    <a href="../index.html" class="header-logo">
+                        <img src="../logo.png" alt="Robert Sheppard Logo" width="200" height="60">
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="header-nav desktop-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="../ai-projects.html" class="nav-link">AI Projects</a></li>
+                        <li class="nav-item"><a href="../design-system.html" class="nav-link">Design System</a></li>
+                        <li class="nav-item"><a href="../contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <nav class="mobile-nav" id="mobileNav">
+                <ul class="mobile-nav-list">
+                    <li class="mobile-nav-item"><a href="../index.html" class="mobile-nav-link">Home</a></li>
+                    <li class="mobile-nav-item"><a href="../ai-projects.html" class="mobile-nav-link">AI Projects</a></li>
+                    <li class="mobile-nav-item"><a href="../design-system.html" class="mobile-nav-link">Design System</a></li>
+                    <li class="mobile-nav-item"><a href="../contact.html" class="mobile-nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Article Header -->
+            <section class="article-header" style="margin: var(--space-l) 0;">
+                <div class="article-meta">
+                    <span class="article-category">AI Projects</span>
+                    <span class="article-date">${new Date().toISOString().split('T')[0]}</span>
+                </div>
+                <h1 class="article-title">${title}</h1>
+                <div role="text" aria-label="Article introduction" class="article-intro">${intro}</div>
+            </section>
+
+            <!-- Hero Image -->
+            <div class="article-hero col-span-4 col-span-tablet-8 col-span-desktop-10" style="grid-column: 2 / 12; margin: var(--space-m) 0 0 0;">
+                <div style="width: 100%; aspect-ratio: 16/9; background: linear-gradient(45deg, #f0f0f0, #e0e0e0); display: flex; align-items: center; justify-content: center;">
+                    <span style="color: #666;">Hero Image Placeholder</span>
+                </div>
+            </div>
+
+            <!-- Article Content -->
+            <div class="article-content col-span-4 col-span-tablet-8 col-span-desktop-10" style="grid-column: 2 / 12;">
+                ${content.split('\n').map(paragraph => 
+                    paragraph.trim() ? `<p>${paragraph.trim()}</p>` : ''
+                ).join('')}
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2025 Robert Sheppard. All rights reserved.</p>
+                </div>
+                <div class="footer-right">
+                    <a href="mailto:contact@robertsheppard.com" class="footer-link">contact@robertsheppard.com</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>`;
+
+            // Download the file
+            const blob = new Blob([articleHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `articles/${id}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            // Show success message
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <strong>Article Created Successfully!</strong><br>
+                <strong>Title:</strong> ${title}<br>
+                <strong>Filename:</strong> articles/${id}.html<br><br>
+                <strong>Next Steps:</strong><br>
+                1. Save the downloaded file to the articles/ folder<br>
+                2. Add this entry to data/articles.json:<br>
+                <pre style="background: #fff; padding: 1rem; margin: 0.5rem 0; border-radius: 4px;">
+{
+  "id": "${id}",
+  "title": "${title}",
+  "category": "AI Projects",
+  "intro": "${intro}",
+  "heroImage": "images/articles/hero-placeholder.jpg",
+  "cardImage": "images/articles/card-placeholder.jpg",
+  "date": "${new Date().toISOString().split('T')[0]}",
+  "readTime": "5 min read",
+  "featured": true
+}</pre>
+                3. Save the articles.json file<br>
+                4. Refresh the homepage and AI Projects page
+            `;
+            
+            // Reset form
+            this.reset();
+        });
+    </script>
+</body>
+</html>
