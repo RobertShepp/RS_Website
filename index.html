@@ -150,13 +150,22 @@
     <script>
         // Initialize articles when page loads
         document.addEventListener('DOMContentLoaded', async function() {
+            console.log('Initializing articles...');
+            
             const articlesManager = new ArticlesManager();
-            await articlesManager.loadArticles();
+            const articles = await articlesManager.loadArticles();
+            
+            console.log('Loaded articles:', articles);
+            console.log('Articles count:', articles.length);
             
             const featuredArticles = articlesManager.getFeaturedArticles();
+            console.log('Featured articles:', featuredArticles);
+            
             const cardsContainer = document.getElementById('featured-projects-cards');
+            console.log('Cards container:', cardsContainer);
             
             if (featuredArticles.length > 0) {
+                console.log('Rendering cards...');
                 cardsContainer.innerHTML = featuredArticles.map(article => `
                     <div class="col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1;">
                         <a href="articles/${article.id}.html" class="article-card">
@@ -175,7 +184,14 @@
                     </div>
                 `).join('');
             } else {
+                console.log('No featured articles found');
                 cardsContainer.innerHTML = '<p style="text-align: center; color: var(--color-text-tertiary);">No featured articles available.</p>';
+            }
+        }).catch(error => {
+            console.error('Error initializing articles:', error);
+            const cardsContainer = document.getElementById('featured-projects-cards');
+            if (cardsContainer) {
+                cardsContainer.innerHTML = '<p style="text-align: center; color: var(--color-error);">Error loading articles. Check console for details.</p>';
             }
         });
     </script>
