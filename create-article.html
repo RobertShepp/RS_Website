@@ -56,6 +56,7 @@
                     <div class="form-group">
                         <label for="title" class="form-label">Article Title *</label>
                         <input type="text" id="title" name="title" class="form-input" required>
+                        <small class="form-help">Paste content here - formatting will be automatically cleaned</small>
                     </div>
 
                     <div class="form-group">
@@ -70,7 +71,17 @@
 
                     <div class="form-group">
                         <label for="intro" class="form-label">Introduction Text *</label>
-                        <textarea id="intro" name="intro" class="form-textarea" rows="3" required></textarea>
+                        <textarea id="intro" name="intro" class="form-textarea pastable-textarea" rows="4" required placeholder="Paste your article content here - rich formatting will be automatically cleaned up..."></textarea>
+                        <div class="paste-options">
+                            <button type="button" id="clearFormatting" class="btn-clear-formatting" style="display: none;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 3L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M3 9h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M3 15h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                Clear formatting
+                            </button>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -178,6 +189,69 @@
             const cardPreview = document.getElementById('cardPreview');
             
             let selectedImageData = null;
+
+            // Paste formatting cleanup utility
+            function cleanPastedText(text) {
+                if (!text) return '';
+                
+                return text
+                    // Remove extra whitespace and normalize line breaks
+                    .replace(/\r\n/g, '\n')
+                    .replace(/\r/g, '\n')
+                    // Remove multiple spaces
+                    .replace(/[ \t]+/g, ' ')
+                    // Remove multiple line breaks (keep max 2)
+                    .replace(/\n{3,}/g, '\n\n')
+                    // Remove leading/trailing whitespace from each line
+                    .replace(/[ \t]+$/gm, '')
+                    .replace(/^[ \t]+/gm, '')
+                    // Remove leading/trailing whitespace from entire text
+                    .trim();
+            }
+
+            // Handle paste events for title field
+            document.getElementById('title').addEventListener('paste', function(e) {
+                setTimeout(() => {
+                    this.value = cleanPastedText(this.value);
+                }, 0);
+            });
+
+            // Handle paste events for intro textarea
+            const introTextarea = document.getElementById('intro');
+            const clearFormattingBtn = document.getElementById('clearFormatting');
+            
+            introTextarea.addEventListener('paste', function(e) {
+                setTimeout(() => {
+                    const cleanedText = cleanPastedText(this.value);
+                    if (cleanedText !== this.value) {
+                        this.value = cleanedText;
+                        clearFormattingBtn.style.display = 'inline-flex';
+                        clearFormattingBtn.addEventListener('click', handleClearFormatting);
+                    }
+                }, 0);
+            });
+
+            // Manual formatting clear function
+            function handleClearFormatting() {
+                const currentText = introTextarea.value;
+                introTextarea.value = cleanPastedText(currentText);
+                clearFormattingBtn.style.display = 'none';
+            }
+
+            // Show clear formatting button if text has formatting issues
+            introTextarea.addEventListener('input', function(){
+                const originalText = this.value;
+                const cleanedText = cleanPastedText(originalText);
+                
+                if (originalText !== cleanedText && originalText.length > 0) {
+                    clearFormattingBtn.style.display = 'inline-flex';
+                    if (!clearFormattingBtn.onclick) {
+                        clearFormattingBtn.onclick = handleClearFormatting;
+                    }
+                } else {
+                    clearFormattingBtn.style.display = 'none';
+                }
+            });
 
             // Handle image file selection
             heroImageFile.addEventListener('change', function(e) {
@@ -401,6 +475,46 @@
         .preview-image-section img {
             border-radius: 4px;
             border: 1px solid var(--color-border-primary);
+        }
+
+        .paste-options {
+            margin-top: var(--space-xs);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .btn-clear-formatting {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-s);
+            background: var(--color-background-secondary);
+            border: 1px solid var(--color-border-primary);
+            border-radius: var(--radius-sm);
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .btn-clear-formatting:hover {
+            background: var(--color-background-tertiary);
+            color: var(--color-text-primary);
+        }
+
+        .btn-clear-formatting svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .pastable-textarea {
+            transition: border-color var(--transition-fast);
+        }
+
+        .pastable-textarea:focus {
+            border-color: var(--color-border-focus);
+            outline: none;
         }
     </style>
 </body>
