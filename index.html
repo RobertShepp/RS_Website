@@ -166,8 +166,8 @@
             
             if (featuredArticles.length > 0) {
                 console.log('Rendering cards...');
-                let html = featuredArticles.map(article => {
-                    console.log('Processing article:', article.id, article.title, 'featured:', article.featured);
+                let html = featuredArticles.map((article, index) => {
+                    console.log(`Card ${index}: id=${article.id}, title="${article.title}", featured=${article.featured}`);
                     return `
                     <div class="col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1;">
                         <a href="articles/${article.id}.html" class="article-card">
@@ -193,12 +193,13 @@
                 console.log('No featured articles found');
                 cardsContainer.innerHTML = '<p style="text-align: center; color: var(--color-text-tertiary);">No featured articles available.</p>';
             }
-        }).catch(error => {
-            console.error('Error initializing articles:', error);
-            const cardsContainer = document.getElementById('featured-projects-cards');
-            if (cardsContainer) {
-                cardsContainer.innerHTML = '<p style="text-align: center; color: var(--color-error);">Error loading articles. Check console for details.</p>';
-            }
+            }).catch(error => {
+                console.error('Error initializing articles:', error);
+                const cardsContainer = document.getElementById('featured-projects-cards');
+                if (cardsContainer) {
+                    cardsContainer.innerHTML = `<p style="text-align: center; color: var(--color-error);">Error loading articles. Check console for details.</p>`;
+                }
+            });
         });
     </script>
 </body>
