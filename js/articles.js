@@ -55,7 +55,7 @@ class ArticlesManager {
             ${article.title}
           </h3>
           <div class="blog-card-button">
-            <a href="articles/${article.id}.html" class="btn btn-secondary">Read Article</a>
+            <a href="articles/${article.filename || article.id + '.html'}" class="btn btn-secondary">Read Article</a>
           </div>
         </div>
       </article>
@@ -77,6 +77,7 @@ class ArticlesManager {
     <link rel="stylesheet" href="../styles/design-tokens.css">
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/components.css">
+    <script src="../js/mobile-nav.js" defer></script>
 </head>
 <body>
     <!-- Header -->
@@ -92,14 +93,14 @@ class ArticlesManager {
                         <a href="../index.html" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="../ai-projects.html" class="nav-link">AI Projects</a>
+                        <a href="../ai-projects.html" class="nav-link active">AI Projects</a>
                     </li>
                     <li class="nav-item">
                         <a href="../contact.html" class="nav-link">Contact</a>
                     </li>
                 </ul>
             </nav>
-            <button class="burger-menu" aria-label="Open navigation menu">
+            <button class="burger-menu" aria-label="Open navigation menu" aria-expanded="false">
                 <svg class="burger-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -107,25 +108,53 @@ class ArticlesManager {
         </div>
     </header>
 
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay"></div>
+    
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" aria-hidden="true">
+        <div class="mobile-nav-header">
+            <span class="mobile-nav-title">Menu</span>
+            <button class="mobile-nav-close" aria-label="Close navigation menu">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+        <div class="mobile-nav-content">
+            <ul class="mobile-nav-list">
+                <li class="mobile-nav-item">
+                    <a href="../index.html" class="mobile-nav-link">Home</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="../ai-projects.html" class="mobile-nav-link active">AI Projects</a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="../contact.html" class="mobile-nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <main class="container section">
         <div class="grid">
             <!-- Article Header -->
-            <article class="article-header" style="grid-column: 2 / 12;">
+            <article class="article-header col-span-4 col-span-tablet-8 col-span-desktop-10" style="grid-column: 1 / -1; grid-column: 2 / 12;">
                 <h4 class="article-category">${article.category}</h4>
                 <h1 class="article-title">${article.title}</h1>
                 <h3 class="article-intro">${article.intro}</h3>
             </article>
 
             <!-- Hero Image -->
-            <div class="article-hero-image" style="grid-column: 1 / -1; margin: var(--space-m) 0;">
-                <img src="../${article.heroImage}" alt="${article.title}" style="width: 100%; height: 400px; object-fit: cover; background-color: var(--color-background-tertiary);">
+            <div class="col-span-4 col-span-tablet-8 col-span-desktop-10" style="grid-column: 1 / -1; grid-column: 2 / 12; margin: var(--space-m) 0 0 0;">
+                <img src="${article.heroImage}" alt="${article.title}" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background-color: var(--color-background-tertiary);">
             </div>
 
             <!-- Article Content -->
-            <div class="article-content" style="grid-column: 2 / 12;">
-                <!-- Content will be added here -->
+            <div class="article-content col-span-4 col-span-tablet-8 col-span-desktop-10" style="grid-column: 1 / -1; grid-column: 2 / 12;">
                 <h4>Article Content</h4>
-                <p>This is where the article content will go. You can add your content here.</p>
+                <p>This article was created using the simple form. The content sections from the form will be displayed here.</p>
+                <p>You can edit this article using the form to add more detailed content sections.</p>
             </div>
         </div>
     </main>

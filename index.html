@@ -10,7 +10,28 @@
     <link rel="stylesheet" href="styles/design-tokens.css">
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/components.css">
-    <script src="js/articles.js" defer></script>
+    <style>
+        /* Ensure 16:9 aspect ratio and proper image filling */
+        .card-image,
+        .blog-card-image {
+            aspect-ratio: 16 / 9 !important;
+            height: auto !important;
+            display: block !important;
+            overflow: hidden !important;
+            background-color: transparent !important;
+            align-items: unset !important;
+            justify-content: unset !important;
+        }
+        
+        .card-image img,
+        .blog-card-image img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            display: block !important;
+        }
+    </style>
+    <script src="js/articles.js?v=2" defer></script>
     <script src="js/mobile-nav.js" defer></script>
 </head>
 <body>
@@ -28,9 +49,6 @@
                     </li>
                     <li class="nav-item">
                         <a href="ai-projects.html" class="nav-link">AI Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="create-article.html" class="nav-link">Create Article</a>
                     </li>
                     <li class="nav-item">
                         <a href="contact.html" class="nav-link">Contact</a>
@@ -65,9 +83,6 @@
                 </li>
                 <li class="mobile-nav-item">
                     <a href="ai-projects.html" class="mobile-nav-link">AI Projects</a>
-                </li>
-                <li class="mobile-nav-item">
-                    <a href="create-article.html" class="mobile-nav-link">Create Article</a>
                 </li>
                 <li class="mobile-nav-item">
                     <a href="contact.html" class="mobile-nav-link">Contact</a>
@@ -170,9 +185,9 @@
                     console.log(`Card ${index}: id=${article.id}, title="${article.title}", featured=${article.featured}`);
                     return `
                     <div class="col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1;">
-                        <a href="articles/${article.id}.html" class="article-card">
-                            <div class="card-image" style="background: linear-gradient(45deg, #f0f0f0, #e0e0e0); height: 200px; display: flex; align-items: center; justify-content: center;">
-                                <span style="color: #666;">No Image Available</span>
+                        <a href="articles/${article.filename || article.id + '.html'}" class="article-card">
+                            <div class="card-image">
+                                <img src="${article.cardImage || 'images/articles/card-placeholder.jpg'}" alt="${article.title}">
                             </div>
                             <div class="card-content">
                                 <span class="card-category">${article.category}</span>
