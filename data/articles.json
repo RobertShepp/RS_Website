@@ -1,6 +1,18 @@
 {
   "articles": [
     {
+      "id": "design-systems",
+      "title": "Building smarter Design Systems with AI",
+      "category": "AI Projects",
+      "intro": "As a product designer, I've always believed in the power of design systems. They're the backbone of scalable, consistent digital products. A well-structured system saves time, reduces friction, and ensures that every element aligns perfectly across screens and teams.",
+      "heroImage": "../images/articles/design-systems-hero.png",
+      "cardImage": "../images/articles/design-systems-hero.png",
+      "date": "2025-10-06",
+      "readTime": "6 min read",
+      "featured": true,
+      "filename": "design-systems.html"
+    },
+    {
       "id": "getting-started",
       "title": "How I got started",
       "category": "AI Projects",
