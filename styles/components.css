@@ -582,6 +582,8 @@
   opacity: 0.8;
   border-radius: 8px;
   background: var(--neutral-black, #000);
+  text-decoration: underline;
+  color: var(--color-neutral-grey);
 }
 
 .btn-secondary {
@@ -593,6 +595,8 @@
 
 .btn-secondary:hover:not(:disabled) {
   border-radius: 8px;
+  text-decoration: underline;
+  color: var(--color-neutral-grey);
 }
 
 
@@ -606,6 +610,8 @@
 .btn-ghost:hover:not(:disabled) {
   background-color: var(--color-background-secondary);
   border-radius: 8px;
+  text-decoration: underline;
+  color: var(--color-neutral-grey);
 }
 
 
