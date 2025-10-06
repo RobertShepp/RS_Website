@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How I Got Started - Robert Sheppard</title>
+    <title>How I got started</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -74,33 +74,83 @@
             <!-- Article Header -->
             <article class="article-header col-span-4 col-span-tablet-8 col-span-desktop-10" style="grid-column: 1 / -1; grid-column: 2 / 12;">
                 <h4 class="article-category">AI Projects</h4>
-                <h1 class="article-title">How I Got Started</h1>
-                <h3 class="article-intro">I am going to use AI for this entire website project, from planning to design, coding and deployment. I started with the simplest of things - the website holding page.</h3>
+                <h1 class="article-title">How I got started</h1>
+                <h3 class="article-intro">I am going to use AI for this entire website project, from planning to design, coding and deployment. I started with the simplest of things - the website holding page. I wrote my first prompt, but quickly realised I needed to include more detail to get better results. In particular, how I wanted text to be classed and how it would scale for mobile.</h3>
             </article>
 
             <!-- Hero Image -->
             <div class="col-span-4 col-span-tablet-8 col-span-desktop-10" style="grid-column: 1 / -1; grid-column: 2 / 12; margin: var(--space-m) 0 0 0;">
-                <img src="../images/articles/hero-placeholder.jpg" alt="AI-powered website development journey" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background-color: var(--color-background-tertiary);">
+                <img src="../images/articles/getting-started-hero.png" alt="Article hero image" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background-color: var(--color-background-tertiary);">
             </div>
 
             <!-- Article Content -->
             <div class="article-content col-span-4 col-span-tablet-8 col-span-desktop-10" style="grid-column: 1 / -1; grid-column: 2 / 12;">
-                <h4>The Journey Begins</h4>
-                <p>I wrote my first prompt, but quickly realised I needed to include more detail to get better results. In particular, how I wanted text to be classed and how it would scale for mobile. This initial learning experience taught me the importance of specificity in AI interactions.</p>
-                
-                <p>As I progressed through this project, I discovered that effective prompting requires understanding both what you want to achieve and how to communicate that goal clearly to the AI system. The iterative process of refining prompts became a crucial skill in my AI-assisted development workflow.</p>
+            <h4>Here's the final prompt…</h4>
+            <p>"Design a responsive holding page for a website. Follow material design layout grids, dark blue background with gradient and AAA accessible text.
 
-                <h4>Learning the Art of Prompting</h4>
-                <p>The key breakthrough came when I started treating prompts like design briefs - specifying not just the end result, but also the constraints, styling preferences, and technical requirements. This approach led to significantly better outcomes and fewer iterations.</p>
+H1 text style 40px to read 'I'm a Lead UX/UI Product Designer with experience delivering digital experiences for brands like Ford, Heathrow, and Hitachi, specialising in the discovery and design of products that balance user needs with business goals.'
 
-                <h4>Building Systems with AI</h4>
-                <p>Throughout this entire website project, I've leveraged AI for planning, design decisions, coding, and deployment strategies. Each phase has reinforced how powerful AI tools can be when used thoughtfully and with clear direction.</p>
+Reduce H1 text to 24px for mobile.
+
+H2 text style 24px to read 'Website coming soon.'
+
+Include the attached profile pic in a circle to appear before the text, ranged left."</p>
+                <p> I copied and pasted this prompt into 5 AI tools - ChatGPT5, Claude, Loveable, Figma Maker and Cursor. I evaluated the results based on style, speed and how easy the final output was to work with.</p>
+            
+            
+
+            <!-- Image Grid - Desktop: 2 columns, Mobile/Tablet: Single column -->
+            <div class="article-image-grid" style="margin: var(--space-l) 0;">
+                <div class="grid" style="gap: 16px;">
+                    <!-- Row 1 -->
+                    <div class="article-image col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1; grid-column: 1 / 7;">
+                        <img src="../images/articles/chatGPT5.png" alt="Article image 1" style="width: 100%; height: 300px; object-fit: cover; background-color: var(--color-background-tertiary);">
+                        <p style="margin-top: var(--space-xs);">ChatGPT5.
+                            The preview took a while to load and it had omitted the profile pic. Although it created a placeholder for it. But even after I prompted it to use the image I attached, it said it did, but it didn’t :-)</p>
+                    </div>
+                    <div class="article-image col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1; grid-column: 7 / 13;">
+                        <img src="../images/articles/Claude.png" alt="Article image 2" style="width: 100%; height: 300px; object-fit: cover; background-color: var(--color-background-tertiary);">
+                        <p style="margin-top: var(--space-xs);">Claude.
+                            Poor Claude really struggled. Can’t say if it was my end or theirs, but the code generation was very slow and the preview took a long time. As you can see by the preview, Claude had a mare. This may be a freak result, I’ve used it before for wireframing and it seemed to do a good job.</p>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="article-image col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1; grid-column: 1 / 7;">
+                        <img src="../images/articles/loveable.png" alt="Article image 3" style="width: 100%; height: 300px; object-fit: cover; background-color: var(--color-background-tertiary);">
+                        <p style="margin-top: var(--space-xs);">Loveable.
+                            Loveable did OK, up to this point it was by far the best result and the responsive version did what I expected it to. All in all pretty quick and a usable result. I asked it to create a Figma file, but it was the worst file I’ve ever seen (and I’ve seen some bad ones).</p>
+                    </div>
+                    <div class="article-image col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1; grid-column: 7 / 13;">
+                        <img src="../images/articles/figmamake.png" alt="Article image 4" style="width: 100%; height: 300px; object-fit: cover; background-color: var(--color-background-tertiary);">
+                        <p style="margin-top: var(--space-xs);">Figma Make.
+                            No surprises that Figma Make was the easiest tool to adapt to, as it forms part of a design ecosystem I’m already well into. It did the best job of delivering a decent, scaleable layout. Although not a Figma file as we know it, it also generated code.</p>
+                    </div>
+                    
+                    <!-- Row 3 -->
+                    <div class="article-image col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1; grid-column: 1 / 7;">
+                        <img src="../images/articles/Cursor.png" alt="Article image 5" style="width: 100%; height: 300px; object-fit: cover; background-color: var(--color-background-tertiary);">
+                        <p style="margin-top: var(--space-xs);">Cursor. OK, full disclosure, I pasted the code from Figma into Cursor but this is where it gets interesting. It cleaned up the code and in the process added some links (without me asking) to my email and Linkedin page. OK, it got the wrong Linkedin account, but that was easily changed. I then asked it to create a link to my portfolio in the same style. What’s great, is that Cursor generates files (.css, index.html, .js script etc) into a folder that can be deployed to your web server, or as I’m doing into a GitHub repository.</p>
+                    </div>
+                    <div class="article-image col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1; grid-column: 7 / 13; visibility: hidden;">
+                        <img src="../images/articles/image-2.jpg" alt="Article image 6" style="width: 100%; height: 300px; object-fit: cover; background-color: var(--color-background-tertiary);">
+                        <p style="margin-top: var(--space-xs);">Caption for image 6</p>
+                    </div>
+                </div>
+            </div>
+
+            <h4>Conclusion</h4>
+            <p>This was a very simple test, but it helped me to define a good workflow, which I can evolve. Figma / Figma Make (for design) > Cursor (for code clean up) > GitHub (for version control and deployment). My next experiment will be to take a Figma design file that has components and a design system, and see how Cursor works with that.
+                .</p>
+            
+            
+
+        
             </div>
         </div>
     </main>
 
     <!-- Spacer -->
-   =<div style="height: var(--space-xl);"></div>
+    <div style="height: var(--space-xl);"></div>
 
     <!-- Footer -->
     <footer class="footer">

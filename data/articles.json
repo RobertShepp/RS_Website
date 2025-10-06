@@ -1,16 +1,16 @@
 {
   "articles": [
     {
-      "id": "how-i-got-started-with-ai",
-      "title": "How I got started with AI",
+      "id": "getting-started",
+      "title": "How I got started",
       "category": "AI Projects",
       "intro": "I am going to use AI for this entire website project, from planning to design, coding and deployment. I started with the simplest of things - the website holding page. I wrote my first prompt, but quickly realised I needed to include more detail to get better results. In particular, how I wanted text to be classed and how it would scale for mobile.",
-      "heroImage": "../images/articles/how-i-got-started-with-ai-hero.png",
-      "cardImage": "../images/articles/how-i-got-started-with-ai-hero.png",
-      "date": "2025-10-04",
+      "heroImage": "../images/articles/getting-started-hero.png",
+      "cardImage": "../images/articles/getting-started-hero.png",
+      "date": "2025-10-06",
       "readTime": "5 min read",
       "featured": true,
-      "filename": "articles_how-i-got-started-with-ai.html"
+      "filename": "getting-started.html"
     }
   ]
 }

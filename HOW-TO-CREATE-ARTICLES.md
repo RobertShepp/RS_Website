@@ -50,7 +50,7 @@ Edit these parts in your new HTML file:
 
 ### **Hero Image** (line 83):
 ```html
-<img src="../images/articles/your-article-title-hero.jpg" alt="YOUR ARTICLE TITLE" ...>
+<img src="../images/articles/getting-started-hero.png" alt="Getting Started" ...>
 ```
 
 ### **Article Content** (lines 88-92):
