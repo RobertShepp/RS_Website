@@ -11,6 +11,18 @@
     <link rel="stylesheet" href="../styles/base.css">
     <link rel="stylesheet" href="../styles/components.css">
     <script src="../js/mobile-nav.js" defer></script>
+    <style>
+        /* Hide image 6 completely on mobile/tablet, but maintain grid layout on desktop */
+        .hidden-image-6 {
+            display: none;
+        }
+        @media (min-width: 1024px) {
+            .hidden-image-6 {
+                display: block;
+                visibility: hidden;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -131,7 +143,7 @@ Include the attached profile pic in a circle to appear before the text, ranged l
                         <img src="../images/articles/Cursor.png" alt="Article image 5" style="width: 100%; height: 300px; object-fit: cover; background-color: var(--color-background-tertiary);">
                         <p style="margin-top: var(--space-xs);">Cursor. OK, full disclosure, I pasted the code from Figma into Cursor but this is where it gets interesting. It cleaned up the code and in the process added some links (without me asking) to my email and Linkedin page. OK, it got the wrong Linkedin account, but that was easily changed. I then asked it to create a link to my portfolio in the same style. What’s great, is that Cursor generates files (.css, index.html, .js script etc) into a folder that can be deployed to your web server, or as I’m doing into a GitHub repository.</p>
                     </div>
-                    <div class="article-image col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1; grid-column: 7 / 13; visibility: hidden;">
+                    <div class="article-image col-span-4 col-span-tablet-8 col-span-desktop-6 hidden-image-6" style="grid-column: 1 / -1; grid-column: 7 / 13;">
                         <img src="../images/articles/image-2.jpg" alt="Article image 6" style="width: 100%; height: 300px; object-fit: cover; background-color: var(--color-background-tertiary);">
                         <p style="margin-top: var(--space-xs);">Caption for image 6</p>
                     </div>
