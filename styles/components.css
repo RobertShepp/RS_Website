@@ -914,3 +914,11 @@
   opacity: 1;
   visibility: visible;
 }
+
+/* Mobile Typography Overrides for Articles */
+@media (max-width: 767px) {
+  .article-title {
+    font-size: 48px;
+    line-height: 56px;
+  }
+}
