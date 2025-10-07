@@ -96,12 +96,12 @@ a:focus {
 
 /* Lists */
 ul, ol {
-  margin-bottom: var(--space-4);
-  padding-left: var(--space-6);
+  margin-bottom: var(--space-s);
+  padding-left: var(--space-xs);
 }
 
 li {
-  margin-bottom: var(--space-1);
+  margin-bottom: var(--space-xxs);
   color: var(--color-text-secondary);
 }
 
