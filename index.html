@@ -195,7 +195,7 @@
                 let html = featuredArticles.map((article, index) => {
                     console.log(`Card ${index}: id=${article.id}, title="${article.title}", featured=${article.featured}`);
                     return `
-                    <div class="col-span-4 col-span-tablet-8 col-span-desktop-6" style="grid-column: 1 / -1;">
+                    <div class="col-span-4 col-span-tablet-8 col-span-desktop-6">
                         <a href="articles/${article.filename || article.id + '.html'}" class="article-card">
                             <div class="card-image">
                                 <img src="${article.cardImage || 'images/articles/card-placeholder.jpg'}" alt="${article.title}">
