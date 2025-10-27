@@ -1,6 +1,18 @@
 {
   "articles": [
     {
+      "id": "figma-mcp-experiment",
+      "title": "Experimenting with Figma MCP + Cursor",
+      "category": "AI Projects",
+      "intro": "In my ongoing exploration of AI-powered workflows, I recently spent some time experimenting with Figma MCP. So what exactly is MCP…?",
+      "heroImage": "../images/articles/MCP-hero.png",
+      "cardImage": "../images/articles/MCP-hero.png",
+      "date": "2025-10-27",
+      "readTime": "5 min read",
+      "featured": true,
+      "filename": "figma-mcp-experiment.html"
+    },
+    {
       "id": "design-systems",
       "title": "Building smarter Design Systems with AI",
       "category": "AI Projects",
