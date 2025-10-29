@@ -40,7 +40,7 @@
             display: block !important;
         }
     </style>
-    <script src="js/articles.js?v=2" defer></script>
+    <script src="js/articles.js?v=4" defer></script>
     <script src="js/mobile-nav.js" defer></script>
 </head>
 <body>
@@ -101,6 +101,16 @@
             </ul>
         </div>
     </nav>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <svg class="moon-icon" style="display: block;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+    </button>
 
     <main class="container section">
         <!-- Hero Section -->
@@ -173,60 +183,7 @@
         </div>
     </footer>
 
-    <script>
-        // Initialize articles when page loads
-        document.addEventListener('DOMContentLoaded', async function() {
-            console.log('Initializing articles...');
-            
-            const articlesManager = new ArticlesManager();
-            const articles = await articlesManager.loadArticles();
-            
-            console.log('Loaded articles:', articles);
-            console.log('Articles count:', articles.length);
-            
-            const featuredArticles = articlesManager.getFeaturedArticles();
-            console.log('Featured articles:', featuredArticles);
-            
-            const cardsContainer = document.getElementById('featured-projects-cards');
-            console.log('Cards container:', cardsContainer);
-            
-            if (featuredArticles.length > 0) {
-                console.log('Rendering cards...');
-                let html = featuredArticles.map((article, index) => {
-                    console.log(`Card ${index}: id=${article.id}, title="${article.title}", featured=${article.featured}`);
-                    return `
-                    <div class="col-span-4 col-span-tablet-8 col-span-desktop-6">
-                        <a href="articles/${article.filename || article.id + '.html'}" class="article-card">
-                            <div class="card-image">
-                                <img src="${article.cardImage || 'images/articles/card-placeholder.jpg'}" alt="${article.title}">
-                            </div>
-                            <div class="card-content">
-                                <span class="card-category">${article.category}</span>
-                                <h3 class="card-title">${article.title}</h3>
-                                <p class="card-excerpt">${article.intro}</p>
-                                <div class="card-meta">
-                                    <span class="card-read-time">${article.readTime}</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    `;
-                }).join('');
-                
-                console.log('Generated HTML:', html);
-                cardsContainer.innerHTML = html;
-            } else {
-                console.log('No featured articles found');
-                cardsContainer.innerHTML = '<p style="text-align: center; color: var(--color-text-tertiary);">No featured articles available.</p>';
-            }
-            }).catch(error => {
-                console.error('Error initializing articles:', error);
-                const cardsContainer = document.getElementById('featured-projects-cards');
-                if (cardsContainer) {
-                    cardsContainer.innerHTML = `<p style="text-align: center; color: var(--color-error);">Error loading articles. Check console for details.</p>`;
-                }
-            });
-        });
-    </script>
+    <!-- Theme Toggle Script -->
+    <script src="js/theme-toggle.js"></script>
 </body>
 </html>

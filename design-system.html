@@ -51,11 +51,41 @@
         </div>
     </header>
 
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <svg class="moon-icon" style="display: block;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+    </button>
+
     <main class="container section">
         <div style="text-align: center; margin-bottom: var(--space-s);">
             <h1>Design System Foundation</h1>
-            <p style="font-size: 18px; color: var(--color-neutral-grey);">This is a test page to verify our design system is working correctly.</p>
+            <p style="font-size: 18px; color: var(--color-text-secondary);">This is a test page to verify our design system is working correctly.</p>
         </div>
+
+        <!-- Dark Mode Feature -->
+        <section style="margin-bottom: var(--space-m);">
+            <h2 style="margin-bottom: var(--space-s);">Dark Mode Support</h2>
+            <div class="card col-span-4">
+                <div class="card-header">
+                    <h3 class="card-title">Theme Toggle</h3>
+                    <p class="card-description">Click the button in the bottom-right corner to switch between light and dark modes</p>
+                </div>
+                <div class="card-content">
+                    <p>The design system now supports dark mode with the following features:</p>
+                    <ul style="padding-left: var(--space-s); margin-top: var(--space-xs);">
+                        <li style="color: var(--color-text-secondary);">Manual theme toggle button with persistent preference</li>
+                        <li style="color: var(--color-text-secondary);">Automatic detection of system preference</li>
+                        <li style="color: var(--color-text-secondary);">Smooth transitions between themes</li>
+                        <li style="color: var(--color-text-secondary);">Optimized colors and shadows for both modes</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
         <!-- Color Palette Test -->
         <section style="margin-bottom: var(--space-m);">
@@ -63,28 +93,33 @@
             <div class="grid" style="max-width: 800px; margin: 0 auto;">
                 <div class="card col-span-2 col-span-tablet-4 col-span-desktop-3">
                     <div style="width: 100%; height: 64px; border-radius: 8px; margin-bottom: 12px; background-color: var(--color-primary-background);"></div>
-                    <p style="font-size: 14px; font-weight: 500;">Primary Background</p>
-                    <p style="font-size: 12px; color: var(--color-neutral-grey);">#0E218C</p>
+                    <p style="font-size: 14px; font-weight: 500; color: var(--color-text-primary);">Primary Background</p>
+                    <p style="font-size: 12px; color: var(--color-text-secondary);">#0E218C</p>
                 </div>
                 <div class="card col-span-2 col-span-tablet-4 col-span-desktop-3">
                     <div style="width: 100%; height: 64px; border-radius: 8px; margin-bottom: 12px; background-color: var(--color-text-blue);"></div>
-                    <p style="font-size: 14px; font-weight: 500;">Text Blue</p>
-                    <p style="font-size: 12px; color: var(--color-neutral-grey);">#60A5FA</p>
+                    <p style="font-size: 14px; font-weight: 500; color: var(--color-text-primary);">Text Blue</p>
+                    <p style="font-size: 12px; color: var(--color-text-secondary);">#60A5FA</p>
                 </div>
                 <div class="card col-span-2 col-span-tablet-4 col-span-desktop-3">
                     <div style="width: 100%; height: 64px; border-radius: 8px; margin-bottom: 12px; background-color: var(--color-text-green);"></div>
-                    <p style="font-size: 14px; font-weight: 500;">Text Green</p>
-                    <p style="font-size: 12px; color: var(--color-neutral-grey);">#4ADE80</p>
+                    <p style="font-size: 14px; font-weight: 500; color: var(--color-text-primary);">Text Green</p>
+                    <p style="font-size: 12px; color: var(--color-text-secondary);">#4ADE80</p>
                 </div>
                 <div class="card col-span-2 col-span-tablet-4 col-span-desktop-3">
                     <div style="width: 100%; height: 64px; border-radius: 8px; margin-bottom: 12px; background-color: var(--color-neutral-black);"></div>
-                    <p style="font-size: 14px; font-weight: 500;">Neutral Black</p>
-                    <p style="font-size: 12px; color: var(--color-neutral-grey);">#000000</p>
+                    <p style="font-size: 14px; font-weight: 500; color: var(--color-text-primary);">Neutral Black</p>
+                    <p style="font-size: 12px; color: var(--color-text-secondary);">#000000</p>
                 </div>
                 <div class="card col-span-2 col-span-tablet-4 col-span-desktop-3">
-                    <div style="width: 100%; height: 64px; border-radius: 8px; margin-bottom: 12px; background-color: var(--color-neutral-grey);"></div>
-                    <p style="font-size: 14px; font-weight: 500;">Neutral Grey</p>
-                    <p style="font-size: 12px; color: var(--color-neutral-grey);">#F3F4F6</p>
+                    <div style="width: 100%; height: 64px; border-radius: 8px; margin-bottom: 12px; background-color: var(--color-background-secondary);"></div>
+                    <p style="font-size: 14px; font-weight: 500; color: var(--color-text-primary);">Background Secondary</p>
+                    <p style="font-size: 12px; color: var(--color-text-secondary);">Adapts to theme</p>
+                </div>
+                <div class="card col-span-2 col-span-tablet-4 col-span-desktop-3">
+                    <div style="width: 100%; height: 64px; border-radius: 8px; margin-bottom: 12px; background-color: var(--color-text-primary);"></div>
+                    <p style="font-size: 14px; font-weight: 500; color: var(--color-text-primary);">Text Primary</p>
+                    <p style="font-size: 12px; color: var(--color-text-secondary);">Adapts to theme</p>
                 </div>
             </div>
         </section>
@@ -355,5 +390,9 @@
             </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/mobile-nav.js"></script>
 </body>
 </html>

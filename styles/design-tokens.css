@@ -171,19 +171,69 @@
 }
 
 /* Dark mode support */
+[data-theme="dark"] {
+  /* Dark mode backgrounds */
+  --color-background-primary: var(--color-neutral-900);
+  --color-background-secondary: var(--color-neutral-800);
+  --color-background-tertiary: var(--color-neutral-700);
+  --color-background-inverse: var(--color-neutral-50);
+
+  /* Dark mode text */
+  --color-text-primary: var(--color-neutral-50);
+  --color-text-secondary: var(--color-neutral-200);
+  --color-text-tertiary: var(--color-neutral-400);
+  --color-text-inverse: var(--color-neutral-900);
+
+  /* Dark mode borders */
+  --color-border-primary: var(--color-neutral-700);
+  --color-border-secondary: var(--color-neutral-600);
+
+  /* Dark mode specific adjustments */
+  --color-neutral-grey: var(--color-neutral-200);
+  
+  /* Card and component backgrounds in dark mode */
+  --card-background: var(--color-neutral-800);
+  
+  /* Shadows for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.5), 0 1px 2px -1px rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+}
+
+/* Automatic dark mode based on system preference */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --color-background-primary: var(--color-primary-background);
+  :root:not([data-theme="light"]) {
+    /* Dark mode backgrounds */
+    --color-background-primary: var(--color-neutral-900);
     --color-background-secondary: var(--color-neutral-800);
     --color-background-tertiary: var(--color-neutral-700);
-    --color-background-inverse: var(--color-neutral-grey);
+    --color-background-inverse: var(--color-neutral-50);
 
-    --color-text-primary: var(--color-neutral-grey);
-    --color-text-secondary: var(--color-neutral-grey);
-    --color-text-tertiary: var(--color-neutral-grey);
-    --color-text-inverse: var(--color-neutral-black);
+    /* Dark mode text */
+    --color-text-primary: var(--color-neutral-50);
+    --color-text-secondary: var(--color-neutral-200);
+    --color-text-tertiary: var(--color-neutral-400);
+    --color-text-inverse: var(--color-neutral-900);
 
+    /* Dark mode borders */
     --color-border-primary: var(--color-neutral-700);
     --color-border-secondary: var(--color-neutral-600);
+
+    /* Dark mode specific adjustments */
+    --color-neutral-grey: var(--color-neutral-200);
+    
+    /* Card and component backgrounds in dark mode */
+    --card-background: var(--color-neutral-800);
+    
+    /* Shadows for dark mode */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+    --shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.5), 0 1px 2px -1px rgb(0 0 0 / 0.5);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.5);
   }
 }
